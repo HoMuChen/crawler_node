@@ -1,0 +1,20 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "chromedriver": "^2.32.3",
+    "express": "^4.16.1",
+    "rethinkdb": "^2.3.3",
+    "selenium-webdriver": "^3.5.0"
+  }
+}
