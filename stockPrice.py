@@ -1,5 +1,7 @@
-import requests
+import time
 from io import StringIO
+
+import requests
 import pandas as pd
 from utils.store import toRethinkdb
 
@@ -29,6 +31,7 @@ df['最低價'] = df['最低價'].apply(lambda x: float(x.replace(',', '')))
 df['收盤價'] = df['收盤價'].apply(lambda x: float(x.replace(',', '')))
 df['漲跌價差'] = df['漲跌價差'].apply(lambda x: float(x.replace(',', '').replace('X', '')))
 df['成交筆數'] = df['成交筆數'].apply(lambda x: float(x.replace(',', '')))
+df['date'] = time.strftime("%Y-%m-%d", time.gmtime())
 
 df = df.rename(columns={
     "證券代號": "comany_id",
@@ -46,5 +49,5 @@ data = []
 for row in df.iterrows():
     data.append(row[1].to_dict())
 
-print("Insert {} stock data in database".format(len(data)))
+print("[**Stock pirce**] Insert {} stock data in database".format(len(data)))
 toRethinkdb(TB, data)
