@@ -1,7 +1,7 @@
 const config = {
-	apiPort: 2277,
-	dbHost: 'localhost',
-	dbPort: 28015,
+	apiPort: process.env['API_PORT'],
+	dbHost: process.env['DB_HOST'],
+	dbPort: process.env['DB_PORT'],
 }
 
 module.exports = config;

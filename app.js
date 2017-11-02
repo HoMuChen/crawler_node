@@ -5,12 +5,14 @@ const config = require('./config');
 const { igCrawlerExpressHandler } = require('./ig');
 const { bitCrawlerExpressHandler } = require('./bitPrice');
 const { etherCrawlerExpressHandler } = require('./etherPrice');
+const { stockPriceHandler } = require('./stockPrice');
 
 const app = new express();
 
 app.get('/ig/:tag', igCrawlerExpressHandler);
 app.get('/bit', bitCrawlerExpressHandler);
 app.get('/ether', etherCrawlerExpressHandler);
+app.get('/stock_price', stockPriceHandler);
 
 app.listen(config.apiPort, function() {
 	console.log(`Api server is running on port ${config.apiPort}`);
