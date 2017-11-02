@@ -1,5 +1,5 @@
 const config = {
-  apiPort: 2277,
+	apiPort: 2277,
 	dbHost: 'localhost',
 	dbPort: 28015,
 }

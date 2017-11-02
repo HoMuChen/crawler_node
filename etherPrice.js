@@ -19,10 +19,10 @@ function run() {
 			return cheerio.load(result.data);
 		})
 		.then($ => {
-			return $('#latest_ether_price').text()
+			return $('#latest_eth_price').text()
 		})
 		.then(priceStr => {
-			const price = priceStr.split('$')[1];
+			const price = priceStr.split('$')[1].trim();
 			const doc = { price: price }
 
 			doc['id'] = r.now().toEpochTime()
