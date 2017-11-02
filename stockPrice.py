@@ -3,7 +3,7 @@ from io import StringIO
 
 import requests
 import pandas as pd
-from utils.store import toRethinkdb
+from utils.store import toRethinkdbAndSelectTwoKeys
 
 TB = 'stock_price'
 
@@ -34,7 +34,7 @@ df['成交筆數'] = df['成交筆數'].apply(lambda x: float(x.replace(',', '')
 df['date'] = time.strftime("%Y-%m-%d", time.gmtime())
 
 df = df.rename(columns={
-    "證券代號": "comany_id",
+    "證券代號": "company_id",
     "證券名稱": "c_name",
     "成交股數": "total_trading_volumn",
     "成交金額": 'total_trading_money',
@@ -50,4 +50,4 @@ for row in df.iterrows():
     data.append(row[1].to_dict())
 
 print("[**Stock pirce**] Insert {} stock data in database".format(len(data)))
-toRethinkdb(TB, data)
+toRethinkdbAndSelectTwoKeys(TB, data, ['company_id', 'date'])
