@@ -13,6 +13,6 @@ def toRethinkdb(table, docs, server=SERVER, port=PORT, db=DB):
 def toRethinkdbAndSelectTwoKeys(table, docs, keys, server=SERVER, port=PORT, db=DB):
     conn = r.connect(server, port, db)
     for doc in docs:
-        doc['id'] = r.uuid( doc[keys[0]] + '-' + keys[1] )
+        doc['id'] = r.uuid( doc[keys[0]] + '-' + doc[keys[1]] )
     r.table(table).insert(docs).run(conn)
     conn.close()
