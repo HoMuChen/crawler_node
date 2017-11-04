@@ -3,7 +3,7 @@ from io import StringIO
 
 import requests
 import pandas as pd
-from utils.store import toRethinkdbAndSelectTwoKeys
+from utils.store import toRethinkdbAndSelectKeys
 
 TB = 'stock_price'
 
@@ -50,4 +50,4 @@ for row in df.iterrows():
     data.append(row[1].to_dict())
 
 print("[**Stock pirce**] Insert {} stock data in database".format(len(data)))
-toRethinkdbAndSelectTwoKeys(TB, data, ['company_id', 'date'])
+toRethinkdbAndSelectKeys(TB, data, ['company_id', 'date'])
