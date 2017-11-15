@@ -3,7 +3,7 @@ const By = webdriver.By;
 const chromedriver = require('chromedriver');
 
 const { scrollToBottom }= require('./utils/selenium');
-const { insertToDB }= require('./utils/store');
+const { insertAndSelectKeys }= require('./utils/store');
 
 const chromeCapabilities = webdriver.Capabilities.chrome();
 chromeCapabilities.set('chromeOptions', {args: ['--headless']});
@@ -59,7 +59,7 @@ const igCrawlByTag = async (tag, account, pwd) => {
 
 		return doc;
 	})
-	insertToDB('ig', 'urls', docs, 'url')
+	insertAndSelectKeys('ig', 'urls', docs, ['url'])
 		
 	driver.close()
 }

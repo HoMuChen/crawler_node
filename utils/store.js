@@ -14,13 +14,17 @@ async function insert(db, table, doc) {
 		.catch(e => console.log(e))
 }
 
-async function insertAndSelectKey(db, table, docs, key) {
+async function insertAndSelectKeys(db, table, docs, keys) {
 	const conn = await getConnection(db);
 	
 	if( Array.isArray(docs) ) {
 		docs
 			.map(doc => {
-				doc.id = r.uuid(doc[key]);
+				const keyStr = keys.reduce((cur, next) => {
+				  cur += doc[next];
+					return cur;
+				}, "")
+				doc.id = r.uuid(keyStr);
 				return doc;
 			})
 			.forEach(doc => {
@@ -28,7 +32,12 @@ async function insertAndSelectKey(db, table, docs, key) {
 					.catch(e => { console.log(e) })
 			})
 	}else {
-		docs.id = r.uuid(docs[key]);
+		const keyStr = keys.reduce((cur, next) => {
+		  cur += doc[next];
+			return cur;
+		}, "")
+
+		docs.id = r.uuid(keyStr);
 
 		r.table(table).insert(docs).run(conn)
 			.catch(e => console.log(e))
@@ -37,5 +46,5 @@ async function insertAndSelectKey(db, table, docs, key) {
 
 module.exports = {
 	insert,
-	insertAndSelectKey,
+	insertAndSelectKeys,
 }
