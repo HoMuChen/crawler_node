@@ -5,12 +5,12 @@ const r = require('rethinkdb');
 const { insert }= require('./utils/store');
 
 const DB = 'Crawler'
-const TABLE = 'ether'
+const TABLE = 'ltc'
 
-const etherCrawlerExpressHandler = (req, res) => {
+const ltcCrawlerExpressHandler = (req, res) => {
 	run();
 
-	res.send(`[ETH] Start to get ether coin price at ${Date()}`)
+	res.send(`[LTC] Start to get ltc coin price at ${Date()}`)
 }
 
 function run() {
@@ -19,19 +19,19 @@ function run() {
 			return cheerio.load(result.data);
 		})
 		.then($ => {
-			return $('#latest_eth_price').text()
+			return $('#latest_ltc_price').text()
 		})
 		.then(priceStr => {
 			const price = priceStr.split('$')[1].trim();
 			const doc = { price: price }
-
+	
 			doc['id'] = r.now().toEpochTime()
-
-			console.log(`[ETH] Insert ethercoin price to db at ${Date()}`)
-			insert(DB, TABLE, doc);
+			
+			console.log(`[LTC] Insert ltccoin price to db at ${Date()}`)
+			insert(DB, TABLE, doc)
 		})
 }
 
 module.exports = {
-	etherCrawlerExpressHandler,
+	ltcCrawlerExpressHandler,
 }

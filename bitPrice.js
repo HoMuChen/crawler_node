@@ -10,7 +10,7 @@ const TABLE = 'bit'
 const bitCrawlerExpressHandler = (req, res) => {
 	run();
 
-	res.send(`Start to get bit coin price at ${Date()}`)
+	res.send(`[BIT] Start to get bit coin price at ${Date()}`)
 }
 
 function run() {
@@ -27,7 +27,7 @@ function run() {
 	
 			doc['id'] = r.now().toEpochTime()
 			
-			console.log(`Insert bitcoin price to db at ${Date()}`)
+			console.log(`[BIT] Insert bitcoin price to db at ${Date()}`)
 			insert(DB, TABLE, doc)
 		})
 }
