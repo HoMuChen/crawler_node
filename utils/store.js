@@ -18,7 +18,7 @@ async function insertAndSelectKeys(db, table, docs, keys) {
 	const conn = await getConnection(db);
 	
 	if( Array.isArray(docs) ) {
-		docs
+		const data = docs
 			.map(doc => {
 				const keyStr = keys.reduce((cur, next) => {
 				  cur += doc[next];
@@ -27,10 +27,11 @@ async function insertAndSelectKeys(db, table, docs, keys) {
 				doc.id = r.uuid(keyStr);
 				return doc;
 			})
-			.forEach(doc => {
-				r.table(table).insert(doc).run(conn)
-					.catch(e => { console.log(e) })
-			})
+
+		r.table(table).insert(data).run(conn, (err, result) => {
+			if (err) console.log(err);
+			conn.close();
+		});
 	}else {
 		const keyStr = keys.reduce((cur, next) => {
 		  cur += doc[next];
