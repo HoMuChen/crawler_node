@@ -11,6 +11,7 @@ const { dispersionHandler } = require('./dispersion');
 const { foreignEXCrawlerExpressHandler } = require('./foreignEX');
 const { legalFCrawlerExpressHandler } = require('./legalFoundation');
 const { taiexCrawlerExpressHandler } = require('./taiex');
+const { goldCrawlerExpressHandler } = require('./gold');
 
 const app = new express();
 
@@ -23,6 +24,7 @@ app.get('/dispersion',         dispersionHandler);
 app.get('/foreign_ex/:type',   foreignEXCrawlerExpressHandler);
 app.get('/legalFoundation',    legalFCrawlerExpressHandler);
 app.get('/taiex',              taiexCrawlerExpressHandler);
+app.get('/gold',               goldCrawlerExpressHandler);
 
 app.listen(config.apiPort, function() {
 	console.log(`Api server is running on port ${config.apiPort}`);
