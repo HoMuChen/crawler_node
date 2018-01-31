@@ -31,7 +31,7 @@ function toNumber(str) {
 }
 
 function run(month) {
-	axios.get(`http:\/\/www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=2017${month}01`)
+	axios.get(`http:\/\/www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=2018${month}01`)
 		.then(result => result.data)
 		.then(data => {
 			if(!data.stat || data.stat !== 'OK') throw Error("[TAIEX] somthing wrong happended");
